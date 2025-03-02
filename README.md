@@ -23,6 +23,29 @@ Since you're solving problems across multiple languages and want a **scalable, s
   └── README.md       ← Overview and instructions
 ```
 
+## algos folder structure
+
+```text
+algos
+  ├── patterns
+  │     ├── 01-two-pointers
+  │     ├── 02-sliding-window
+  │     └── ...
+  ├── problems
+  │     ├── easy
+  │     ├── medium
+  │     └── hard
+  └── solutions
+        ├── CSharp
+        ├── Go
+        ├── Java
+        ├── JavaScript
+        ├── Python
+        └── TypeScript
+```
+
+## another suggested folder structure
+
 ```text
 /learn-algos                # Root directory for algorithm learning
   |-- /patterns             # Core algorithmic patterns
