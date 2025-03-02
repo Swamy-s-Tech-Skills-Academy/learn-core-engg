@@ -15,6 +15,15 @@ Since you're solving problems across multiple languages and want a **scalable, s
 ## **📁 Recommended Folder Structure**
 
 ```text
+/learn-core-engg
+  ├── algos           ← All algorithm learning materials
+  ├── system-design   ← Dedicated to system design concepts, case studies, and exercises
+  ├── ood             ← Object-oriented design principles and projects
+  ├── api-design      ← API design principles and examples
+  └── README.md       ← Overview and instructions
+```
+
+```text
 /learn-algos                # Root directory for algorithm learning
   |-- /patterns             # Core algorithmic patterns
   |    |-- /01-two-pointers
