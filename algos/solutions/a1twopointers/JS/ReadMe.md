@@ -3,5 +3,5 @@
 ## Valid Palindrome
 
 ```powershell
-
+npm init -y
 ```
