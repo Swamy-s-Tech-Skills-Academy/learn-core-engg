@@ -4,4 +4,8 @@
 
 ```powershell
 npm init -y
+
+node main.js
+
+node alog-test.js
 ```

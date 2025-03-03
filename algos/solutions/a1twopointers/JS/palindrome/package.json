@@ -8,5 +8,8 @@
   "keywords": [],
   "author": "Viswanatha Swamy",
   "license": "MIT",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "palindrome": "file:"
+  }
 }
