@@ -135,3 +135,49 @@ algos
 2️⃣ **Which pattern do you want to start with first?** (I suggest **Two Pointers** or **Sliding Window**).
 
 Let’s set up your repository and start solving problems 🚀!
+
+Agenda (50-Minute Hands-On Session):
+
+Your revised agenda looks great! Here’s a **refined version** with slight **formatting improvements** for clarity and flow:
+
+---
+
+### **🚀 Hands-On with .NET Aspire 9.0: New Features & Real-World Demos**
+
+## ⏳ **Introduction** (5 mins)
+
+- Overview of .NET Aspire 9.0
+- Key improvements in tooling, dashboard, and telemetry
+
+## ⚡ **Hands-On: Showcasing Key Differences in .NET Aspire 9.0** (10 mins)
+
+- **Hello World:** .NET 8 vs .NET 9 Aspire
+
+## 🎨 **Exploring the Enhanced .NET Aspire Dashboard** (10 mins)
+
+- Managing resource lifecycles (**Start/Stop/Restart**)
+- Console log enhancements (**color-coded logs**)
+
+## 🛠️ **Hands-On: App Host & Resource Management** (10 mins)
+
+- Waiting for **dependencies before startup**
+- Implementing **resource health checks with HTTP endpoints**
+
+## 🛠️ **Hands-On: Working with MS SQL Server & Redis Locally** (10 mins)
+
+- Running **MS SQL Server** in a container
+- Running **Redis** in a container
+- **(Stretch Goal)**: Integrating **Azure OpenAI**
+
+## 📊 **Hands-On: Advanced Telemetry & Observability** (10 mins)
+
+- **Configuring telemetry filtering**
+- **Enabling browser telemetry**
+
+## ❓ **Q&A & Closing Remarks** (5 mins)
+
+- **Summary of key takeaways**
+
+---
+
+This structure ensures a **balanced mix of hands-on learning and exploration** while keeping it **engaging and interactive**. Let me know if you need any more refinements! 😊🔥
