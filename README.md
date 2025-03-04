@@ -136,10 +136,6 @@ algos
 
 Let’s set up your repository and start solving problems 🚀!
 
-Agenda (50-Minute Hands-On Session):
-
-Your revised agenda looks great! Here’s a **refined version** with slight **formatting improvements** for clarity and flow:
-
 ---
 
 ### **🚀 Hands-On with .NET Aspire 9.0: New Features & Real-World Demos**
