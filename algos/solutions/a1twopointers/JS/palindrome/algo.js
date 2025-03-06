@@ -1,21 +1,11 @@
 // algo.js
-function isAlphaNumeric(char) { return /[a-z0-9]/.test(char); }
-
 function isPalindrome(inputString) {
-    inputString = inputString.toLowerCase();
+    const sanitized = inputString.toLowerCase().replace(/[^a-z0-9]/g, '');
 
-    let left = 0, right = inputString.length - 1;
+    let left = 0, right = sanitized.length - 1;
 
     while (left < right) {
-        while (left < right && !isAlphaNumeric(inputString[left])) {
-            left++;
-        }
-
-        while (left < right && !isAlphaNumeric(inputString[right])) {
-            right--;
-        }
-
-        if (inputString[left] !== inputString[right]) {
+        if (sanitized[left] !== sanitized[right]) {
             return false;
         }
 
