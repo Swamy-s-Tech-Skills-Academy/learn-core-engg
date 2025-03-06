@@ -1,14 +1,18 @@
 // algo.js
-function isPalindrome(s) {
-    let left = 0,
-        right = s.length - 1;
+function isPalindrome(inputString) {
+    inputString = inputString.toLowerCase();
+
+    let left = 0, right = inputString.length - 1;
+
     while (left < right) {
-        if (s[left] !== s[right]) {
+        if (inputString[left] !== inputString[right]) {
             return false;
         }
+
         left++;
         right--;
     }
+
     return true;
 }
 
