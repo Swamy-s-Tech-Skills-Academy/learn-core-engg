@@ -1,14 +1,18 @@
 // algo.js
-function isPalindrome(s) {
-    let left = 0,
-        right = s.length - 1;
+function isPalindrome(inputString) {
+    const sanitized = inputString.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+    let left = 0, right = sanitized.length - 1;
+
     while (left < right) {
-        if (s[left] !== s[right]) {
+        if (sanitized[left] !== sanitized[right]) {
             return false;
         }
+
         left++;
         right--;
     }
+
     return true;
 }
 
