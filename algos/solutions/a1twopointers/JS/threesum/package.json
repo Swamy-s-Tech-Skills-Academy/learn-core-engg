@@ -11,5 +11,8 @@
   "description": "",
   "dependencies": {
     "threesum": "file:"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
   }
 }
