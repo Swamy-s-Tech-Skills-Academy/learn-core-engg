@@ -1,6 +1,6 @@
 // helper_threesum.js
 
-function testThreeSum(threeSum) {
+function showThreeSumDemo(threeSum) {
     console.log("\n========== Three Sum Tests ==========");
     const testCases = [
         { input: [-1, 0, 1, 2, -1, -4], description: "Example 1" },
@@ -18,4 +18,4 @@ function testThreeSum(threeSum) {
     });
 }
 
-module.exports = { testThreeSum };
+module.exports = { showThreeSumDemo };

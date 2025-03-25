@@ -1,6 +1,6 @@
 // helper_palindrome.js
 
-function testValidPalindrome(isPalindrome) {
+function showValidPalindromeDemo(isPalindrome) {
     console.log("========== Valid Palindrome Tests ==========");
     const testCases = [
         "RACEACAR",               // Mixed-case; after sanitization, should be palindrome if correct.
@@ -27,4 +27,4 @@ function testValidPalindrome(isPalindrome) {
     });
 }
 
-module.exports = { testValidPalindrome };
+module.exports = { testValidPalindrome: showValidPalindromeDemo };

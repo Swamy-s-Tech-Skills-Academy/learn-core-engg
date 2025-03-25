@@ -6,7 +6,7 @@ const { threeSum } = require("./threesum/algo");
 // Import helper test functions from separate files
 const { testValidPalindrome } = require("./palindrome/helper_palindrome");
 const { testRemoveNth } = require("./removenthfromend/helper_removenth");
-const { testThreeSum } = require("./threesum/helper_threesum");
+const { showThreeSumDemo } = require("./threesum/helper_threesum");
 
 
 // -------------------- Main Execution --------------------
@@ -15,7 +15,7 @@ function main() {
 
     testRemoveNth(removeNthFromEnd, ListNode);
 
-    testThreeSum(threeSum);
+    showThreeSumDemo(threeSum);
 }
 
 main();
