@@ -27,4 +27,4 @@ function showValidPalindromeDemo(isPalindrome) {
     });
 }
 
-module.exports = { testValidPalindrome: showValidPalindromeDemo };
+module.exports = { showValidPalindromeDemo };

@@ -22,7 +22,7 @@ function linkedListToArray(head) {
 }
 
 function showRemoveNthNodeDemo(removeNthFromEnd, ListNode) {
-    console.log("\n========== Remove Nth Node from End Tests ==========");
+    console.log("\n****************************** Remove Nth Node from End Tests ******************************");
     const testCases = [
         { input: [1, 2, 3, 4, 5], n: 2, expected: [1, 2, 3, 5] },
         { input: [1], n: 1, expected: [] },
@@ -44,4 +44,4 @@ function showRemoveNthNodeDemo(removeNthFromEnd, ListNode) {
     });
 }
 
-module.exports = { testRemoveNth: showRemoveNthNodeDemo };
+module.exports = { showRemoveNthNodeDemo };
