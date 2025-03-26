@@ -1,4 +1,4 @@
-import { isPalindrome } from "./algo";
+import { isPalindrome } from "./palindrome/algo";
 
 const testCases = [
     "racecar",
