@@ -1,6 +1,4 @@
-import { isPalindrome } from "./algo";
-
-export function showValidPalindromeDemo(): void {
+export function showValidPalindromeDemo(isPalindrome: (s: string) => boolean): void {
     console.log("========== Valid Palindrome Tests ==========");
     const testCases: string[] = [
         "RACEACAR",

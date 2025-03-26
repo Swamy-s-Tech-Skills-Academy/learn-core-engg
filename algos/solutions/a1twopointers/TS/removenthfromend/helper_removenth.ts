@@ -1,4 +1,4 @@
-import { ListNode, removeNthFromEnd } from "./algo";
+import { ListNode, removeNthFromEnd } from "./algo";  // ✅ Use ListNode directly
 
 // Helper: Create a linked list from an array
 function createLinkedList(arr: number[]): ListNode | null {
@@ -21,7 +21,8 @@ function linkedListToArray(head: ListNode | null): number[] {
     return result;
 }
 
-export function showRemoveNthNodeDemo(): void {
+// Function to run and display test cases
+export function showRemoveNthNodeDemo(): void {  // ✅ No parameters needed
     console.log("\n****************************** Remove Nth Node from End Tests ******************************");
     const testCases = [
         { input: [1, 2, 3, 4, 5], n: 2, expected: [1, 2, 3, 5] },

@@ -1,6 +1,4 @@
-import { threeSum } from "./algo";
-
-export function showThreeSumDemo(): void {
+export function showThreeSumDemo(threeSum: (nums: number[]) => number[][]): void {
     console.log("\n****************************** Three Sum Tests ******************************");
     const testCases = [
         { input: [-1, 0, 1, 2, -1, -4], description: "Example 1" },
