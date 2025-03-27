@@ -6,8 +6,8 @@
 npm init -y
 npm install --save-dev jest
 
-node main.js
-npm test
+npm start
+npm run test
 ```
 
 ## Three Sum
