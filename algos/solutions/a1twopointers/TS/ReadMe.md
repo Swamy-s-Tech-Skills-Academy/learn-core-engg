@@ -9,7 +9,7 @@ npm install --save-dev jest ts-jest @types/jest ts-node typescript @types/node
 npx ts-jest config:init
 
 
-ts-node main.ts
+npm start
 npm run test
 ```
 
