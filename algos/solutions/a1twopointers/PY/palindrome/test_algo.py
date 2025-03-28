@@ -1,5 +1,7 @@
 import unittest
-from algo import is_palindrome
+# from algo import is_palindrome
+# Absolute Import
+from palindrome.algo import is_palindrome
 
 
 class TestIsPalindrome(unittest.TestCase):

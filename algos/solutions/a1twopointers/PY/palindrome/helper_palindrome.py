@@ -1,4 +1,8 @@
-from algo import is_palindrome
+# from algo import is_palindrome
+# Absolute Import
+from palindrome.algo import is_palindrome
+# Relative Import
+# from .algo import is_palindrome
 
 
 def show_valid_palindrome_demo() -> None:
