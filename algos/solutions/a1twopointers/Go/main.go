@@ -1,9 +1,9 @@
 package main
 
 import (
-	"a1twopointers/palindrome"
-	"a1twopointers/removenthfromend"
-	"a1twopointers/threesum"
+	"a1twopointers/go/palindrome"
+	"a1twopointers/go/removenthfromend"
+	"a1twopointers/go/threesum"
 	"fmt"
 	"strings"
 )
