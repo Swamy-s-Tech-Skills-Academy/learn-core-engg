@@ -1,5 +1,12 @@
 # Two Pointers Solution in Java
 
+## Few Commands
+
+```powershell
+gradle wrapper
+
+```
+
 ## **📂 Folder Structure (Java + Gradle)**
 
 ```text
