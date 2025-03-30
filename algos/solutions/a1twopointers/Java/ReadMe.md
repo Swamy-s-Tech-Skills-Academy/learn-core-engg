@@ -2,8 +2,36 @@
 
 ## Few Commands
 
+### How to Build and Run the Project
+
+> 1. `cd  D:\STSA\learn-core-engg\algos\solutions\a1twopointers\Java>`
+
 ```powershell
 gradle wrapper
+
+## To upgrade
+./gradlew wrapper --gradle-version 8.13 --distribution-type=bin
+
+./gradlew clean
+
+## Build the Project
+./gradlew build
+Run the following command to build the project:
+./gradlew build --warning-mode all
+./gradlew build --stacktrace
+
+## Run the Main Class
+Run the following command to execute the Main class:
+./gradlew run
+
+## Run Unit Tests
+Run the following command to execute unit tests:
+./gradlew test
+
+./gradlew build jacocoTestReport
+./gradlew build jacocoTestReport --info
+
+./gradlew dependencies
 
 ```
 

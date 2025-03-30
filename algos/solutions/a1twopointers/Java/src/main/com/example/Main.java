@@ -1,4 +1,6 @@
-import palindrome.PalindromeHelper;
+package com.example;
+
+import com.example.palindrome.PalindromeHelper;
 // import removenthfromend.RemoveNthHelper;
 // import threesum.ThreeSumHelper;
 
