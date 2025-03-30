@@ -13,6 +13,9 @@ gradle wrapper
 ./gradlew wrapper --gradle-version 8.13 --distribution-type=bin
 
 ./gradlew clean
+./gradlew build
+./gradlew run
+./gradlew test
 
 ## Build the Project
 ./gradlew build

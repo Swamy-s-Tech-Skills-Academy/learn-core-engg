@@ -1,7 +1,7 @@
 package com.example;
 
 import com.example.palindrome.PalindromeHelper;
-// import removenthfromend.RemoveNthHelper;
+import com.example.removenthfromend.RemoveNthHelper;
 // import threesum.ThreeSumHelper;
 
 public class Main {
@@ -11,8 +11,8 @@ public class Main {
         System.out.println("\n👉 Palindrome Check:");
         PalindromeHelper.demoPalindrome();
 
-        // System.out.println("\n👉 Remove Nth Node from End:");
-        // RemoveNthHelper.demoRemoveNth();
+        System.out.println("\n👉 Remove Nth Node from End:");
+        RemoveNthHelper.demoRemoveNth();
 
         // System.out.println("\n👉 Three Sum:");
         // ThreeSumHelper.demoThreeSum();
