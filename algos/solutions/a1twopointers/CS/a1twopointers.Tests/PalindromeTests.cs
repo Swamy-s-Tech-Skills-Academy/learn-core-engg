@@ -1,5 +1,4 @@
 ﻿using a1twopointers.PalindromeDemo;
-using Xunit;
 
 namespace a1twopointers.Tests;
 
