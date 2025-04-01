@@ -1,4 +1,4 @@
-from algo import circular_array_loop
+from circulararray.algo import circular_array_loop
 
 
 def show_circular_array_loop_demo() -> None:
