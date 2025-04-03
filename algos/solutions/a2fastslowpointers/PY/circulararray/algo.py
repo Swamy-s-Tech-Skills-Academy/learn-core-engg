@@ -1,62 +1,49 @@
-# algo.py
-from typing import List
+def circular_array_loop(nums):
+    size = len(nums)
 
+    if size < 2:
+        return False  # A cycle requires at least two elements.
 
-def circular_array_loop(nums: List[int]) -> bool:
-    length = len(nums)
-    if length == 0:
-        return False
+    # Helper function to get the next index considering circular nature
+    def next_index(index):
+        return (index + nums[index]) % size  # Handles wrap-around
 
-    def next_index(index: int, num: int) -> int:
-        return (index + num) % length
+    for i in range(size):
+        if nums[i] == 0:
+            continue  # Skip elements that are already visited
 
-    for start in range(length):
-        if nums[start] == 0:
-            continue
-
-        direction = nums[start] > 0
-        slow, fast = start, start
+        slow, fast = i, i
+        forward = nums[i] > 0  # Direction of movement
 
         while True:
-            slow = next_index(slow, nums[slow])
-            fast = next_index(fast, nums[fast])
+            # Move slow pointer
+            slow = next_index(slow)
+            if nums[slow] == 0 or (nums[slow] > 0) != forward:
+                break
 
+            # Move fast pointer twice
+            fast = next_index(fast)
+            if nums[fast] == 0 or (nums[fast] > 0) != forward:
+                break
+
+            fast = next_index(fast)
+            if nums[fast] == 0 or (nums[fast] > 0) != forward:
+                break
+
+            # Cycle detected
             if slow == fast:
-                if slow == next_index(slow, nums[slow]) and slow != start:
+                # Ensure cycle length is greater than 1
+                if slow == next_index(slow):
                     break
+                return True
 
-                cycle_length = 1
-                current = next_index(slow, nums[slow])
-
-                valid_cycle = True
-                while current != slow:
-                    if (nums[current] > 0) != direction:
-                        valid_cycle = False
-                        break
-                    cycle_length += 1
-                    current = next_index(current, nums[current])
-
-                if valid_cycle and cycle_length > 1:
-                    return True
+        # Mark visited elements as 0 to prevent rechecking
+        j = i
+        while nums[j] != 0 and (nums[j] > 0) == forward:
+            next_pos = next_index(j)
+            nums[j] = 0  # Mark as visited
+            if next_pos == j:
                 break
+            j = next_pos
 
-            fast = next_index(fast, nums[fast])
-            if (nums[slow] > 0) != direction or (nums[fast] > 0) != direction:
-                break
-
-            if (nums[next_index(fast, nums[fast])] > 0) != direction:
-                break
-
-            fast = next_index(fast, nums[fast])
-
-        if nums[slow] == 0:
-            continue
-
-        j = start
-        while nums[j] != 0 and (nums[j] > 0) == direction:
-            next_j = next_index(j, nums[j])
-            nums[j] = 0
-            if next_j == j:
-                break
-            j = next_j
     return False
