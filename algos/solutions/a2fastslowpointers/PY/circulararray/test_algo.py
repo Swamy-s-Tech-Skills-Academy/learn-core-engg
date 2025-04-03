@@ -1,5 +1,5 @@
 import unittest
-from algo import circular_array_loop
+from circulararray.algo import circular_array_loop
 
 
 class TestCircularArrayLoop(unittest.TestCase):
