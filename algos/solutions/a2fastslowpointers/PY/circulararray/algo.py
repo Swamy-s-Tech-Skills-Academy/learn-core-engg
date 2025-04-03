@@ -21,37 +21,17 @@ def circular_array_loop(nums: List[int]) -> bool:
             slow = next_index(slow, nums[slow])
             fast = next_index(fast, nums[fast])
 
-            if slow == fast:
-                if slow == next_index(slow, nums[slow]):
-                    break
-
-                cycle_length = 1
-                current = next_index(slow, nums[slow])
-
-                valid_cycle = True
-                while current != slow:
-                    if (nums[current] > 0) != direction:
-                        valid_cycle = False
-                        break
-                    cycle_length += 1
-                    current = next_index(current, nums[current])
-
-                if valid_cycle and cycle_length > 1:
-                    return True
-                break
-
-            fast = next_index(fast, nums[fast])
             if (nums[slow] > 0) != direction or (nums[fast] > 0) != direction:
                 break
 
-            if (nums[next_index(fast, nums[fast])] > 0) != direction:
+            fast = next_index(fast, nums[fast])
+            if (nums[fast] > 0) != direction:
                 break
 
-            # Move the fast pointer a second time.
-            fast = next_index(fast, nums[fast])
-
-        if nums[slow] == 0:
-            continue
+            if slow == fast:
+                if slow == next_index(slow, nums[slow]):
+                    break
+                return True
 
         j = start
         while nums[j] != 0 and (nums[j] > 0) == direction:
@@ -60,4 +40,5 @@ def circular_array_loop(nums: List[int]) -> bool:
             if next_j == j:
                 break
             j = next_j
+
     return False
