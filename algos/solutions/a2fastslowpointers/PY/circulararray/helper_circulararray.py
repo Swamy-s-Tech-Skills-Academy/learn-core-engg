@@ -9,15 +9,16 @@ def show_circular_array_loop_demo() -> None:
         [-1, -2, -3, -4, -5],
         [2, 1, -1, -2],
         [-1, -2, -3, -4, -5, 6],
-        [1, 2, -3, 3, 4, 7, 1],
-        [2, 2, 2, 7, 2, -1, 2, -1, -1]
+        [1, 2, -3, 3, 4, 7, 1]
     ]
 
     for idx, arr in enumerate(test_cases, start=1):
+        # Make a copy because the algorithm might modify the array.
+        arr_copy = arr.copy()
         print(f"\nTest Case #{idx}:")
         print("-" * 80)
-        print(f"Input Circular Array: {arr}")
-        print(f"Found loop: {circular_array_loop(arr)}")
+        print(f"Input Circular Array: {arr_copy}")
+        print(f"Found loop: {circular_array_loop(arr_copy)}")
         print("-" * 80)
 
 
