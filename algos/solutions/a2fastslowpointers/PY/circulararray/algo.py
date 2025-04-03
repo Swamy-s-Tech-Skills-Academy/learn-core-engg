@@ -13,47 +13,38 @@ def circular_array_loop(nums: List[int]) -> bool:
     """
     length = len(nums)
     if length < 2:
-        return False  # At least two elements are needed to form a cycle.
+        return False
 
-    def next_index(i: int) -> int:
-        """Compute the next index in the circular array."""
-        return (i + nums[i]) % length
+    def next_index(pointer: int, value: int, size: int) -> int:
+        result = (pointer + value) % size
+        if result < 0:
+            result += size
+        return result
 
     for i in range(length):
-        if nums[i] == 0:
-            continue  # Skip already processed elements
-
-        slow, fast = i, i
-        direction = nums[i] > 0  # True for forward, False for backward
+        slow = i
+        fast = i
+        forward = nums[i] > 0
+        cycle_length = 0
 
         while True:
-            # Move slow pointer one step.
-            slow = next_index(slow)
-            if nums[slow] == 0 or (nums[slow] > 0) != direction:
+            slow = next_index(slow, nums[slow], length)
+            cycle_length += 1
+            if (nums[slow] > 0) != forward or nums[slow] % length == 0:
                 break
 
-            # Move fast pointer two steps.
-            fast = next_index(fast)
-            if nums[fast] == 0 or (nums[fast] > 0) != direction:
-                break
-            fast = next_index(fast)
-            if nums[fast] == 0 or (nums[fast] > 0) != direction:
+            fast = next_index(fast, nums[fast], length)
+            if (nums[fast] > 0) != forward or nums[fast] % length == 0:
                 break
 
-            # Cycle detected.
+            fast = next_index(fast, nums[fast], length)
+            if (nums[fast] > 0) != forward or nums[fast] % length == 0:
+                break
+
             if slow == fast:
-                # Check for self-loop; if the pointer moves to itself in one step, it's invalid.
-                if slow == next_index(slow):
+                if cycle_length > 1 and slow != next_index(slow, nums[slow], length):
+                    return True
+                else:
                     break
-                return True
-
-        # Mark all nodes in the current traversal as visited (set them to 0) to avoid reprocessing.
-        j = i
-        while nums[j] != 0 and (nums[j] > 0) == direction:
-            next_pos = next_index(j)
-            nums[j] = 0  # Mark as visited
-            if next_pos == j:
-                break
-            j = next_pos
 
     return False
