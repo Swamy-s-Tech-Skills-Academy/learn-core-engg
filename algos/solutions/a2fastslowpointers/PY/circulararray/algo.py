@@ -19,29 +19,38 @@ def is_not_cycle(nums: list[int], prev_direction: bool, pointer: int) -> bool:
 def circular_array_loop(nums: list[int]) -> bool:
     """
     Determine if the given circular array contains a cycle.
-    A valid cycle must have a length of at least two and be in a single direction.
+    A valid cycle must:
+    - Have a length of at least two.
+    - Move in a single direction (all forward or all backward).
     """
     size = len(nums)
+
+    def next_index(index: int) -> int:
+        """Compute the next index in a circular manner."""
+        return (index + nums[index]) % size
+
     for i in range(size):
-        slow = i
-        fast = i
-        # Determine the direction from the starting index
-        forward = nums[i] > 0
+        slow, fast = i, i
+        forward = nums[i] > 0  # Direction of movement
+        visited = set()
 
         while True:
-            slow = next_step(slow, nums[slow], size)
-            if is_not_cycle(nums, forward, slow):
-                break
+            slow = next_index(slow)
+            if slow in visited or (nums[slow] > 0) != forward:
+                break  # Not a valid cycle
 
-            fast = next_step(fast, nums[fast], size)
-            if is_not_cycle(nums, forward, fast):
-                break
+            fast = next_index(fast)
+            if fast in visited or (nums[fast] > 0) != forward:
+                break  # Not a valid cycle
 
-            fast = next_step(fast, nums[fast], size)
-            if is_not_cycle(nums, forward, fast):
-                break
+            fast = next_index(fast)
+            if fast in visited or (nums[fast] > 0) != forward:
+                break  # Not a valid cycle
 
             if slow == fast:
-                return True
+                return True  # Cycle found
+
+            visited.add(slow)
+            visited.add(fast)
 
     return False
