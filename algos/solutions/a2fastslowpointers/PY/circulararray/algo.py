@@ -3,48 +3,44 @@ from typing import List
 
 def circular_array_loop(nums: List[int]) -> bool:
     """
-    Determines if there is a cycle in the circular array where:
-    - Movement follows the direction of the numbers (+ for forward, - for backward).
-    - The cycle must have more than one element.
-    - The cycle must be in a single direction.
-
-    :param nums: List of non-zero integers representing the circular array.
-    :return: True if a valid cycle exists, otherwise False.
+    Determines if there is a cycle in the circular array.
     """
-    length = len(nums)
-    if length < 2:
-        return False
+    n = len(nums)
 
-    def next_index(pointer: int, value: int, size: int) -> int:
-        result = (pointer + value) % size
-        if result < 0:
-            result += size
-        return result
+    def next_index(index: int) -> int:
+        """Computes the next index in a circular array."""
+        return (index + nums[index]) % n
 
-    for i in range(length):
-        slow = i
-        fast = i
-        forward = nums[i] > 0
-        cycle_length = 0
+    for i in range(n):
+        if nums[i] == 0:  # Skip processed elements
+            continue
+
+        slow, fast = i, i
+        direction = nums[i] > 0  # True if positive, False if negative
 
         while True:
-            slow = next_index(slow, nums[slow], length)
-            cycle_length += 1
-            if (nums[slow] > 0) != forward or nums[slow] % length == 0:
+            slow = next_index(slow)
+            if nums[slow] == 0 or (nums[slow] > 0) != direction:
                 break
 
-            fast = next_index(fast, nums[fast], length)
-            if (nums[fast] > 0) != forward or nums[fast] % length == 0:
+            fast = next_index(fast)
+            if nums[fast] == 0 or (nums[fast] > 0) != direction:
                 break
-
-            fast = next_index(fast, nums[fast], length)
-            if (nums[fast] > 0) != forward or nums[fast] % length == 0:
+            fast = next_index(fast)
+            if nums[fast] == 0 or (nums[fast] > 0) != direction:
                 break
 
             if slow == fast:
-                if cycle_length > 1 and slow != next_index(slow, nums[slow], length):
+                # Ensure it's a valid cycle (not a single-element self-loop)
+                if slow != next_index(slow):
                     return True
-                else:
-                    break
+                break
+
+        # Mark all visited elements as 0 (processed)
+        j = i
+        while nums[j] != 0 and (nums[j] > 0) == direction:
+            next_pos = next_index(j)
+            nums[j] = 0
+            j = next_pos
 
     return False
