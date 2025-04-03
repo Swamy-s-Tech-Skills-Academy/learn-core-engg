@@ -3,14 +3,14 @@ from typing import List
 
 
 def circular_array_loop(nums: List[int]) -> bool:
-    size = len(nums)
-    if size == 0:
+    length = len(nums)
+    if length == 0:
         return False
 
     def next_index(index: int, num: int) -> int:
-        return (index + num) % size
+        return (index + num) % length
 
-    for start in range(size):
+    for start in range(length):
         if nums[start] == 0:
             continue
 
@@ -20,7 +20,8 @@ def circular_array_loop(nums: List[int]) -> bool:
         while True:
             slow = next_index(slow, nums[slow])
             fast = next_index(fast, nums[fast])
-            if fast == slow:
+
+            if slow == fast:
                 if slow == next_index(slow, nums[slow]):
                     break
 
@@ -42,6 +43,12 @@ def circular_array_loop(nums: List[int]) -> bool:
             fast = next_index(fast, nums[fast])
             if (nums[slow] > 0) != direction or (nums[fast] > 0) != direction:
                 break
+
+            if (nums[next_index(fast, nums[fast])] > 0) != direction:
+                break
+
+            # Move the fast pointer a second time.
+            fast = next_index(fast, nums[fast])
 
         if nums[slow] == 0:
             continue
