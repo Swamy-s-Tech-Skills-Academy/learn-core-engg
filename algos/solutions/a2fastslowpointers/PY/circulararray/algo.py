@@ -1,45 +1,56 @@
+# algo.py
 from typing import List
 
 
 def circular_array_loop(nums: List[int]) -> bool:
-    n = len(nums)
-    if n == 0:
+    size = len(nums)
+    if size == 0:
         return False
 
-    def next_index(i: int) -> int:
-        return (i + nums[i]) % n
+    def next_index(index: int, num: int) -> int:
+        return (index + num) % size
 
-    for i in range(n):
-        if nums[i] == 0:
+    for start in range(size):
+        if nums[start] == 0:
             continue
 
-        direction = nums[i] > 0
-        slow, fast = i, i
-        cycle_length = 0
+        direction = nums[start] > 0
+        slow, fast = start, start
 
         while True:
-            slow = next_index(slow)
-            fast = next_index(next_index(fast))
-            cycle_length += 1
+            slow = next_index(slow, nums[slow])
+            fast = next_index(fast, nums[fast])
+            if fast == slow:
+                if slow == next_index(slow, nums[slow]):
+                    break
 
-            if (
-                (nums[slow] > 0) != direction
-                or (nums[fast] > 0) != direction
-                or (nums[next_index(fast)] > 0) != direction
-            ):
+                cycle_length = 1
+                current = next_index(slow, nums[slow])
+
+                valid_cycle = True
+                while current != slow:
+                    if (nums[current] > 0) != direction:
+                        valid_cycle = False
+                        break
+                    cycle_length += 1
+                    current = next_index(current, nums[current])
+
+                if valid_cycle and cycle_length > 1:
+                    return True
                 break
 
-            if slow == fast:
-                if cycle_length <= 1:
-                    break
-                return True
+            fast = next_index(fast, nums[fast])
+            if (nums[slow] > 0) != direction or (nums[fast] > 0) != direction:
+                break
 
-        j = i
-        while nums[j] != 0 and ((nums[j] > 0) == direction):
-            next_j = next_index(j)
+        if nums[slow] == 0:
+            continue
+
+        j = start
+        while nums[j] != 0 and (nums[j] > 0) == direction:
+            next_j = next_index(j, nums[j])
             nums[j] = 0
             if next_j == j:
                 break
             j = next_j
-
     return False
