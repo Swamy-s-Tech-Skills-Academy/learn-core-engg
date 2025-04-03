@@ -1,59 +1,44 @@
-from typing import List
+import unittest
+from circulararray.algo import circular_array_loop
 
 
-def circular_array_loop(nums: List[int]) -> bool:
+class TestCircularArrayLoop(unittest.TestCase):
     """
-    Determines if there is a cycle in the circular array where:
-    - Movement follows the direction of the numbers (+ for forward, - for backward).
-    - The cycle must have more than one element.
-    - The cycle must be in a single direction.
-
-    :param nums: List of non-zero integers representing the circular array.
-    :return: True if a valid cycle exists, otherwise False.
+    Unit test cases for the circular_array_loop function.
     """
-    length = len(nums)
-    if length < 2:
-        return False  # At least two elements are needed to form a cycle.
 
-    def next_index(i: int) -> int:
-        """Compute the next index in the circular array."""
-        return (i + nums[i]) % length
+    def test_case_with_cycle(self):
+        # Valid cycle: All elements move in the same direction and cycle length > 1.
+        self.assertTrue(circular_array_loop([1, 1, 1, 1, 1]))
 
-    for i in range(length):
-        if nums[i] == 0:
-            continue  # Skip already processed elements
+    def test_case_without_cycle(self):
+        self.assertFalse(circular_array_loop([-2, -3, -9]))         # No cycle.
+        # Single-element loops, invalid.
+        self.assertFalse(circular_array_loop([-5, -4, -3, -2, -1]))
+        # No cycle.
+        self.assertFalse(circular_array_loop([1, 2, 3, 4, 5]))
+        # Mixed directions, invalid.
+        self.assertFalse(circular_array_loop([-1, 2, 2, -1]))
+        # No cycle.
+        self.assertFalse(circular_array_loop([-1, -2, -3, -4, -5, 6]))
+        # Mixed directions.
+        self.assertFalse(circular_array_loop([2, 2, 2, 7, 2, -1, 2, -1, -1]))
+        # Mixed directions.
+        self.assertFalse(circular_array_loop([2, -1, 1, 2, 2]))
 
-        slow, fast = i, i
-        direction = nums[i] > 0  # True for forward, False for backward
+    def test_case_complex(self):
+        # Additional complex test cases based on expected behavior.
+        self.assertFalse(circular_array_loop([-2, -3, -9]))
+        self.assertFalse(circular_array_loop([-5, -4, -3, -2, -1]))
+        self.assertFalse(circular_array_loop([-1, -2, -3, -4, -5]))
+        # Valid cycle exists.
+        self.assertTrue(circular_array_loop([1, 2, -3, 3, 4, 7, 1]))
 
-        while True:
-            # Move slow pointer one step.
-            slow = next_index(slow)
-            if nums[slow] == 0 or (nums[slow] > 0) != direction:
-                break
+    def test_case_edge(self):
+        # Edge cases: Single element or no movement cannot form a cycle.
+        self.assertFalse(circular_array_loop([1]))
+        self.assertFalse(circular_array_loop([0, 0, 0, 0]))
 
-            # Move fast pointer two steps.
-            fast = next_index(fast)
-            if nums[fast] == 0 or (nums[fast] > 0) != direction:
-                break
-            fast = next_index(fast)
-            if nums[fast] == 0 or (nums[fast] > 0) != direction:
-                break
 
-            # Cycle detected.
-            if slow == fast:
-                # Check for self-loop; if the pointer moves to itself in one step, it's invalid.
-                if slow == next_index(slow):
-                    break
-                return True
-
-        # Mark all nodes in the current traversal as visited (set them to 0) to avoid reprocessing.
-        j = i
-        while nums[j] != 0 and (nums[j] > 0) == direction:
-            next_pos = next_index(j)
-            nums[j] = 0  # Mark as visited
-            if next_pos == j:
-                break
-            j = next_pos
-
-    return False
+if __name__ == "__main__":
+    unittest.main()

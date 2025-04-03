@@ -13,26 +13,26 @@ def circular_array_loop(nums: List[int]) -> bool:
     """
     length = len(nums)
     if length < 2:
-        return False  # At least 2 elements are needed to form a cycle.
+        return False  # At least two elements are needed to form a cycle.
 
-    def next_index(index: int) -> int:
-        """Compute the next index in a circular array."""
-        return (index + nums[index]) % length
+    def next_index(i: int) -> int:
+        """Compute the next index in the circular array."""
+        return (i + nums[i]) % length
 
     for i in range(length):
         if nums[i] == 0:
-            continue  # Already processed
+            continue  # Skip already processed elements
 
-        direction = nums[i] > 0  # True for forward, False for backward
         slow, fast = i, i
+        direction = nums[i] > 0  # True for forward, False for backward
 
         while True:
-            # Move slow pointer one step
+            # Move slow pointer one step.
             slow = next_index(slow)
             if nums[slow] == 0 or (nums[slow] > 0) != direction:
                 break
 
-            # Move fast pointer two steps
+            # Move fast pointer two steps.
             fast = next_index(fast)
             if nums[fast] == 0 or (nums[fast] > 0) != direction:
                 break
@@ -40,18 +40,18 @@ def circular_array_loop(nums: List[int]) -> bool:
             if nums[fast] == 0 or (nums[fast] > 0) != direction:
                 break
 
-            # If slow and fast pointers meet, a cycle is detected.
+            # Cycle detected.
             if slow == fast:
-                # Check for a single-element loop (invalid)
+                # Check for self-loop; if the pointer moves to itself in one step, it's invalid.
                 if slow == next_index(slow):
                     break
                 return True
 
-        # Mark all elements along the current traversal as 0 to avoid reprocessing.
+        # Mark all nodes in the current traversal as visited (set them to 0) to avoid reprocessing.
         j = i
         while nums[j] != 0 and (nums[j] > 0) == direction:
             next_pos = next_index(j)
-            nums[j] = 0  # Mark as visited.
+            nums[j] = 0  # Mark as visited
             if next_pos == j:
                 break
             j = next_pos
