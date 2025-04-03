@@ -1,5 +1,5 @@
-from happynumber.algo_helper import show_happy_number_demo
-from circulararray.algo_helper import show_circular_array_loop_demo
+from happynumber.helper_happynumber import show_happy_number_demo
+from circulararray.helper_circulararray import show_circular_array_loop_demo
 
 
 def main() -> None:
