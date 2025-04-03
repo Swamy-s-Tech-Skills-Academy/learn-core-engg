@@ -4,12 +4,10 @@ from circulararray.algo import circular_array_loop
 
 class TestCircularArrayLoop(unittest.TestCase):
     def test_case_with_cycle(self):
-        # Expecting a cycle exists
-        self.assertTrue(circular_array_loop([-1, 2, 2, -1]))
+        self.assertTrue(circular_array_loop([-1, 2, 2, -1]))  # Cycle exists
 
     def test_case_without_cycle(self):
-        # Expecting no cycle
-        self.assertFalse(circular_array_loop([1, 2, 3, 4, 5]))
+        self.assertFalse(circular_array_loop([1, 2, 3, 4, 5]))  # No cycle
 
     def test_case_complex(self):
         self.assertFalse(circular_array_loop([-2, -3, -9]))        # No cycle
@@ -23,7 +21,7 @@ class TestCircularArrayLoop(unittest.TestCase):
             [1, 2, -3, 3, 4, 7, 1]))   # Cycle exists
 
     def test_case_edge(self):
-        # Single element cannot form a cycle.
+        # Single element cannot form a cycle
         self.assertFalse(circular_array_loop([1]))
 
 
