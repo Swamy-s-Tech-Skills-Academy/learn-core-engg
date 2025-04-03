@@ -1,69 +1,61 @@
 from typing import List
 
 
-def next_step(pointer: int, value: int, size: int) -> int:
-    """Calculate the next index in the circular array."""
-    result = (pointer + value) % size
-    return result
-
-
-def is_not_cycle(nums: list[int], prev_direction: bool, pointer: int) -> bool:
-    """
-    Determine if the movement at the given pointer does not continue the cycle.
-    - The movement must be in the same direction.
-    - The element should not be a multiple of the array length (which causes no movement).
-    """
-    curr_direction = nums[pointer] >= 0
-    if prev_direction != curr_direction or (nums[pointer] % len(nums) == 0):
-        return True
-    return False
-
-
 def circular_array_loop(nums: List[int]) -> bool:
+    """
+    Determine if a circular array contains a valid cycle.
+    A valid cycle must have a length of at least 2 and be entirely in one direction.
+    """
     n = len(nums)
+    if n == 0:
+        return False
 
-    # Helper: Get next index in circular fashion.
+    # Helper: Compute the next index in a circular array.
     def next_index(i: int) -> int:
         return (i + nums[i]) % n
 
+    # Helper: Check if the movement at pointer is not in the same direction or is a single-step loop.
+    def is_not_cycle(pointer: int, direction: bool) -> bool:
+        # If the element at pointer does not follow the same direction, or if the movement is 0 (or a multiple of n)
+        if (nums[pointer] >= 0) != direction or (nums[pointer] % n == 0):
+            return True
+        return False
+
     for i in range(n):
-        # Skip if already processed.
+        # Skip if this element was already processed.
         if nums[i] == 0:
             continue
 
-        # Determine direction (True if positive, False if negative)
-        direction = nums[i] > 0
+        direction = nums[i] > 0  # True for forward, False for backward.
         slow, fast = i, i
 
         while True:
-            # Move slow pointer one step
-            next_slow = next_index(slow)
-            # Check if the move is valid
-            if (nums[next_slow] > 0) != direction or next_slow == slow:
+            slow_next = next_index(slow)
+            if is_not_cycle(slow_next, direction):
                 break
 
-            # Move fast pointer one step
-            next_fast = next_index(fast)
-            if (nums[next_fast] > 0) != direction or next_fast == fast:
+            fast_next = next_index(fast)
+            if is_not_cycle(fast_next, direction):
                 break
 
-            # Move fast pointer one more step
-            next_fast = next_index(next_fast)
-            if (nums[next_fast] > 0) != direction or next_fast == fast:
+            fast_next = next_index(fast_next)
+            if is_not_cycle(fast_next, direction):
                 break
 
-            slow = next_slow
-            fast = next_fast
+            slow = slow_next
+            fast = fast_next
 
-            # A cycle is found if slow meets fast
             if slow == fast:
+                # Check for single-element loop.
+                if slow == next_index(slow):
+                    break
                 return True
 
         # Mark all nodes in the current traversal as 0 to avoid re-processing.
         j = i
-        while (nums[j] > 0) == direction:
+        while nums[j] != 0 and ((nums[j] > 0) == direction):
             next_j = next_index(j)
-            nums[j] = 0  # Mark visited
+            nums[j] = 0  # Mark visited.
             if next_j == j:
                 break
             j = next_j
