@@ -24,16 +24,19 @@ def circular_array_loop(nums):
     return False
 
 
-# A function to calculate the next step
 def next_step(pointer, value, size):
     return (pointer + value) % size
 
 
-# A function to detect a cycle doesn't exist
 def is_not_cycle(nums, prev_direction, pointer):
-    curr_direction = nums[pointer] >= 0
+    curr_direction = nums[pointer] > 0
 
-    if (prev_direction != curr_direction) or (nums[pointer] % len(nums) == 0):
+    # If direction changes, cycle is invalid
+    if prev_direction != curr_direction:
         return True
-    else:
-        return False
+
+    # A self-loop is not a valid cycle
+    if next_step(pointer, nums[pointer], len(nums)) == pointer:
+        return True
+
+    return False
