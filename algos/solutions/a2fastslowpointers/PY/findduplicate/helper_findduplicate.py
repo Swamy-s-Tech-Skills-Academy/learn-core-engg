@@ -1,9 +1,10 @@
 # helper_findduplicate.py
 
+
 from findduplicate.algo import find_duplicate
 
 
-def main():
+def show_find_duplicate_demo():
     test_cases = [
         [1, 3, 2, 3, 5, 4],
         [2, 4, 5, 4, 1, 3],
@@ -19,4 +20,5 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    show_find_duplicate_demo()
+    print("=" * 50)

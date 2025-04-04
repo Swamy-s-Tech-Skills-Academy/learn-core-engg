@@ -1,7 +1,7 @@
 # test_algo.py
 
 import unittest
-from algo import find_duplicate
+from findduplicate.algo import find_duplicate
 
 
 class TestFindDuplicate(unittest.TestCase):
