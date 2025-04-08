@@ -1,11 +1,11 @@
 // main.js
 
 const { isHappyNumber } = require("./happynumber/algo");
-const { circularArrayLoop } = require("./circulararrayloop/algo");
+const { circularArrayLoop } = require("./circulararray/algo");
 
 // Import helpers
 const { showHappyNumberDemo } = require("./happynumber/helper_happynumber");
-const { showCircularArrayLoopDemo } = require("./circulararrayloop/helper_circulararrayloop");
+const { showCircularArrayLoopDemo } = require("./circulararray/helper_circulararrayloop");
 
 // -------------------- Main Execution --------------------
 function main() {

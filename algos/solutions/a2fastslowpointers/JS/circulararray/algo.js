@@ -1,40 +1,65 @@
-function circularArrayLoop(nums) {
-    const size = nums.length;
+// circulararray/algo.js
 
-    for (let i = 0; i < size; i++) {
+function circularArrayLoop(nums) {
+    const n = nums.length;
+
+    function nextIndex(current) {
+        const next = ((current + nums[current]) % n + n) % n;
+        return next;
+    }
+
+    for (let i = 0; i < n; i++) {
         let slow = i;
         let fast = i;
-        const forward = nums[i] > 0;
+        const direction = nums[i] > 0;
+
+        // Helper to check if direction is consistent
+        const isSameDirection = (index) => (nums[index] > 0) === direction;
 
         while (true) {
-            slow = nextStep(slow, nums[slow], size);
-            if (isNotCycle(nums, forward, slow)) break;
+            const nextSlow = nextIndex(slow);
+            const nextFast = nextIndex(fast);
+            const nextFast2 = nextIndex(nextFast);
 
-            fast = nextStep(fast, nums[fast], size);
-            if (isNotCycle(nums, forward, fast)) break;
+            if (!isSameDirection(nextSlow) || !isSameDirection(nextFast) || !isSameDirection(nextFast2)) {
+                break;
+            }
 
-            fast = nextStep(fast, nums[fast], size);
-            if (isNotCycle(nums, forward, fast)) break;
+            slow = nextSlow;
+            fast = nextFast2;
 
-            if (slow === fast) return true;
+            if (slow === fast) {
+                if (slow === nextIndex(slow)) {
+                    // 1-element loop — invalid
+                    break;
+                }
+                return true;
+            }
+        }
+
+        // Mark all nodes in this path as visited
+        let j = i;
+        while (isSameDirection(j)) {
+            const next = nextIndex(j);
+            nums[j] = 0; // visited marker
+            j = next;
         }
     }
 
     return false;
 }
 
-function nextStep(pointer, value, size) {
-    let result = (pointer + value) % size;
-    return result >= 0 ? result : result + size;
+function nextStep(index, move, size) {
+    let result = (index + move) % size;
+    return result < 0 ? result + size : result;
 }
 
-function isNotCycle(nums, prevDirection, pointer) {
-    const currDirection = nums[pointer] >= 0;
-    return prevDirection !== currDirection || nums[pointer] % nums.length === 0;
+function isNotCycle(nums, originalDir, index) {
+    const currentDir = nums[index] >= 0;
+    if (originalDir !== currentDir || Math.abs(nums[index] % nums.length) === 0) {
+        return true;
+    }
+    return false;
 }
 
-module.exports = {
-    circularArrayLoop,
-    nextStep,
-    isNotCycle
-};
+module.exports = { circularArrayLoop };
