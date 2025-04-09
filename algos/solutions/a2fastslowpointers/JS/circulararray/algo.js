@@ -11,6 +11,8 @@ function circularArrayLoop(nums) {
     for (let i = 0; i < n; i++) {
         if (visited[i]) continue; // Skip already visited nodes
 
+        console.log(`Starting new traversal from index ${i}`);
+
         let slow = i;
         let fast = i;
         const direction = nums[i] > 0;
@@ -22,7 +24,10 @@ function circularArrayLoop(nums) {
             const nextFast = nextIndex(fast);
             const nextFast2 = nextIndex(nextFast);
 
+            console.log(`slow: ${slow}, nextSlow: ${nextSlow}, fast: ${fast}, nextFast2: ${nextFast2}`);
+
             if (!isSameDirection(nextSlow) || !isSameDirection(nextFast) || !isSameDirection(nextFast2)) {
+                console.log(`Breaking loop due to direction mismatch at index ${slow}`);
                 break;
             }
 
@@ -31,6 +36,7 @@ function circularArrayLoop(nums) {
 
             if (slow === fast) {
                 if (slow === nextIndex(slow)) {
+                    console.log(`Single-element loop detected at index ${slow}, breaking.`);
                     break;
                 }
 
@@ -39,6 +45,7 @@ function circularArrayLoop(nums) {
 
                 while (current !== slow) {
                     if (!isSameDirection(current)) {
+                        console.log(`Cycle broken due to direction mismatch at index ${current}`);
                         cycleLength = 0;
                         break;
                     }
@@ -47,6 +54,7 @@ function circularArrayLoop(nums) {
                 }
 
                 if (cycleLength > 1) {
+                    console.log(`Valid cycle detected starting at index ${i}`);
                     return true;
                 }
                 break;
@@ -56,12 +64,14 @@ function circularArrayLoop(nums) {
         let j = i;
         while (isSameDirection(j) && !visited[j]) {
             const next = nextIndex(j);
+            console.log(`Marking index ${j} as visited.`);
             visited[j] = true;
             nums[j] = 0; // Mark as processed to avoid revisiting
             j = next;
         }
     }
 
+    console.log(`No valid cycle found in the array.`);
     return false;
 }
 
