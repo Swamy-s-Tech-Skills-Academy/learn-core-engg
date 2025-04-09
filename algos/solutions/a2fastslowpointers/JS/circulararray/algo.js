@@ -2,7 +2,6 @@
 
 function circularArrayLoop(nums) {
     const n = nums.length;
-    const visited = new Array(n).fill(false); // Track visited nodes
 
     function nextIndex(current) {
         const next = ((current + nums[current]) % n + n) % n;
@@ -10,8 +9,6 @@ function circularArrayLoop(nums) {
     }
 
     for (let i = 0; i < n; i++) {
-        if (visited[i]) continue; // Skip already visited nodes
-
         let slow = i;
         let fast = i;
         const direction = nums[i] > 0;
@@ -39,18 +36,14 @@ function circularArrayLoop(nums) {
                     break;
                 }
 
-                // Ensure the cycle length is greater than 1 and involves distinct indices
+                // Ensure the cycle length is greater than 1
                 let cycleLength = 1;
                 let current = nextIndex(slow);
-                const visitedInCycle = new Set();
-                visitedInCycle.add(slow);
-
                 while (current !== slow) {
-                    if (!isSameDirection(current) || visitedInCycle.has(current)) {
+                    if (!isSameDirection(current)) {
                         cycleLength = 0; // Invalid cycle
                         break;
                     }
-                    visitedInCycle.add(current);
                     cycleLength++;
                     current = nextIndex(current);
                 }
@@ -64,9 +57,9 @@ function circularArrayLoop(nums) {
 
         // Mark all nodes in this path as visited
         let j = i;
-        while (isSameDirection(j) && !visited[j]) {
+        while (isSameDirection(j)) {
             const next = nextIndex(j);
-            visited[j] = true; // Mark as visited
+            nums[j] = 0; // Mark as visited
             j = next;
         }
     }
