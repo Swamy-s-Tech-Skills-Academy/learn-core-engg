@@ -8,8 +8,8 @@ test('Cycle exists: [1, 2, -3, 3, 4, 7, 1]', () => {
     expect(circularArrayLoop([1, 2, -3, 3, 4, 7, 1])).toBe(true);
 });
 
-test('No cycle: [-5, -4, -3, -2, -1]', () => {
-    expect(circularArrayLoop([-5, -4, -3, -2, -1])).toBe(false);
+test('Cycle exists: [-5, -4, -3, -2, -1]', () => {
+    expect(circularArrayLoop([-5, -4, -3, -2, -1])).toBe(true);
 });
 
 test('No cycle: [2, 1, -1, -2]', () => {

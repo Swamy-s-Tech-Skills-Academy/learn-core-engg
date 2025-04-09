@@ -1,41 +1,60 @@
 // circulararray/algo.js
 
+/**
+ * Detects whether a circular array contains a valid cycle.
+ * A valid cycle:
+ *  - Moves in one direction only (all + or all -)
+ *  - Has length > 1 (no self‑loops)
+ */
 function circularArrayLoop(nums) {
     const n = nums.length;
-
-    // Helper function to calculate the next index
-    const nextIndex = (current) => {
-        return ((current + nums[current]) % n + n) % n; // Ensure positive modulo
-    };
+    const next = (i) => ((i + nums[i]) % n + n) % n;
 
     for (let i = 0; i < n; i++) {
-        if (nums[i] === 0) continue; // Skip already visited elements
+        if (nums[i] === 0) continue;
 
-        let slow = i, fast = i;
-        const direction = nums[i] > 0; // Determine the direction of the loop
-
-        while (true) {
-            slow = nextIndex(slow);
-            if (nums[slow] === 0 || (nums[slow] > 0) !== direction) break;
-
-            fast = nextIndex(fast);
-            if (nums[fast] === 0 || (nums[fast] > 0) !== direction) break;
-
-            fast = nextIndex(fast);
-            if (nums[fast] === 0 || (nums[fast] > 0) !== direction) break;
-
-            if (slow === fast) {
-                if (slow === nextIndex(slow)) break; // Single-element loop
-                return true;
-            }
+        const dir = nums[i] > 0;
+        // if it immediately loops to itself, mark and skip
+        if (next(i) === i) {
+            nums[i] = 0;
+            continue;
         }
 
-        // Mark all elements in the current path as visited
-        let current = i;
-        while (nums[current] !== 0) {
-            const next = nextIndex(current);
-            nums[current] = 0;
-            current = next;
+        let slow = i, fast = i;
+        while (true) {
+            // advance slow one step
+            slow = next(slow);
+            if (
+                nums[slow] === 0 ||
+                (nums[slow] > 0) !== dir ||
+                next(slow) === slow
+            ) break;
+
+            // advance fast one step
+            fast = next(fast);
+            if (
+                nums[fast] === 0 ||
+                (nums[fast] > 0) !== dir ||
+                next(fast) === fast
+            ) break;
+
+            // advance fast second step
+            fast = next(fast);
+            if (
+                nums[fast] === 0 ||
+                (nums[fast] > 0) !== dir ||
+                next(fast) === fast
+            ) break;
+
+            if (slow === fast) return true;
+        }
+
+        // clean up this path
+        let j = i;
+        while (nums[j] !== 0 && (nums[j] > 0) === dir) {
+            const nxt = next(j);
+            nums[j] = 0;
+            j = nxt;
         }
     }
 
