@@ -39,11 +39,15 @@ function circularArrayLoop(nums) {
                 // Ensure the cycle length is greater than 1
                 let cycleLength = 1;
                 let current = nextIndex(slow);
+                const visitedInCycle = new Set();
+                visitedInCycle.add(slow);
+
                 while (current !== slow) {
-                    if (!isSameDirection(current)) {
+                    if (!isSameDirection(current) || visitedInCycle.has(current)) {
                         cycleLength = 0; // Invalid cycle
                         break;
                     }
+                    visitedInCycle.add(current);
                     cycleLength++;
                     current = nextIndex(current);
                 }
