@@ -67,7 +67,7 @@ function circularArrayLoop(nums) {
                 console.log(`Cycle detected with length: ${cycleLength}`); // Debug log
 
                 if (cycleLength > 1) {
-                    // Additional check: Ensure no index is revisited within the cycle
+                    // Ensure the cycle does not revisit any index outside the cycle
                     const cycleIndices = Array.from(visitedInCycle);
                     const uniqueIndices = new Set(cycleIndices);
                     if (cycleIndices.length === uniqueIndices.size) {
