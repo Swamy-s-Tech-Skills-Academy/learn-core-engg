@@ -19,3 +19,27 @@ test('No cycle: [2, 1, -1, -2]', () => {
 test('Edge case: [-1, -2, -3, -4, -5, 6]', () => {
     expect(circularArrayLoop([-1, -2, -3, -4, -5, 6])).toBe(false);
 });
+
+test('No cycle: Single element [0]', () => {
+    expect(circularArrayLoop([0])).toBe(false);
+});
+
+test('No cycle: Single element [1]', () => {
+    expect(circularArrayLoop([1])).toBe(false);
+});
+
+test('No cycle: Single element [-1]', () => {
+    expect(circularArrayLoop([-1])).toBe(false);
+});
+
+test('Cycle exists: [3, 1, 2]', () => {
+    expect(circularArrayLoop([3, 1, 2])).toBe(true);
+});
+
+test('No cycle: [0, 0, 0]', () => {
+    expect(circularArrayLoop([0, 0, 0])).toBe(false);
+});
+
+test('No cycle: [1, -1, 1, -1]', () => {
+    expect(circularArrayLoop([1, -1, 1, -1])).toBe(false);
+});
