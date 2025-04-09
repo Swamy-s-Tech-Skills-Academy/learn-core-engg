@@ -1,4 +1,4 @@
-const { circularArrayLoop } = require('./algo');
+const circularArrayLoop = require('./algo');
 
 test('Cycle exists: [2, 2, 2, 7, 2, -1, 2, -1, -1]', () => {
     expect(circularArrayLoop([2, 2, 2, 7, 2, -1, 2, -1, -1])).toBe(true);

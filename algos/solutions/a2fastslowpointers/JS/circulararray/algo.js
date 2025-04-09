@@ -2,77 +2,44 @@
 
 function circularArrayLoop(nums) {
     const n = nums.length;
-    const visited = new Array(n).fill(false); // Track visited nodes
 
-    function nextIndex(current) {
-        return ((current + nums[current]) % n + n) % n;
-    }
+    // Helper function to calculate the next index
+    const nextIndex = (current) => {
+        return ((current + nums[current]) % n + n) % n; // Ensure positive modulo
+    };
 
     for (let i = 0; i < n; i++) {
-        if (visited[i]) continue; // Skip already visited nodes
+        if (nums[i] === 0) continue; // Skip already visited elements
 
-        console.log(`Starting new traversal from index ${i}`);
-
-        let slow = i;
-        let fast = i;
-        const direction = nums[i] > 0;
-
-        const isSameDirection = (index) => nums[index] !== 0 && (nums[index] > 0) === direction;
+        let slow = i, fast = i;
+        const direction = nums[i] > 0; // Determine the direction of the loop
 
         while (true) {
-            const nextSlow = nextIndex(slow);
-            const nextFast = nextIndex(fast);
-            const nextFast2 = nextIndex(nextFast);
+            slow = nextIndex(slow);
+            if (nums[slow] === 0 || (nums[slow] > 0) !== direction) break;
 
-            console.log(`slow: ${slow}, nextSlow: ${nextSlow}, fast: ${fast}, nextFast2: ${nextFast2}`);
+            fast = nextIndex(fast);
+            if (nums[fast] === 0 || (nums[fast] > 0) !== direction) break;
 
-            if (!isSameDirection(nextSlow) || !isSameDirection(nextFast) || !isSameDirection(nextFast2)) {
-                console.log(`Breaking loop due to direction mismatch at index ${slow}`);
-                break;
-            }
-
-            slow = nextSlow;
-            fast = nextFast2;
+            fast = nextIndex(fast);
+            if (nums[fast] === 0 || (nums[fast] > 0) !== direction) break;
 
             if (slow === fast) {
-                if (slow === nextIndex(slow)) {
-                    console.log(`Single-element loop detected at index ${slow}, breaking.`);
-                    break;
-                }
-
-                let cycleLength = 1;
-                let current = nextIndex(slow);
-
-                while (current !== slow) {
-                    if (!isSameDirection(current)) {
-                        console.log(`Cycle broken due to direction mismatch at index ${current}`);
-                        cycleLength = 0;
-                        break;
-                    }
-                    cycleLength++;
-                    current = nextIndex(current);
-                }
-
-                if (cycleLength > 1) {
-                    console.log(`Valid cycle detected starting at index ${i}`);
-                    return true;
-                }
-                break;
+                if (slow === nextIndex(slow)) break; // Single-element loop
+                return true;
             }
         }
 
-        let j = i;
-        while (isSameDirection(j) && !visited[j]) {
-            const next = nextIndex(j);
-            console.log(`Marking index ${j} as visited.`);
-            visited[j] = true;
-            nums[j] = 0; // Mark as processed to avoid revisiting
-            j = next;
+        // Mark all elements in the current path as visited
+        let current = i;
+        while (nums[current] !== 0) {
+            const next = nextIndex(current);
+            nums[current] = 0;
+            current = next;
         }
     }
 
-    console.log(`No valid cycle found in the array.`);
     return false;
 }
 
-module.exports = { circularArrayLoop };
+module.exports = circularArrayLoop;
