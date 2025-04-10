@@ -1,65 +1,64 @@
 // circulararray/algo.js
 
+/**
+ * Detects whether a circular array contains a valid cycle.
+ * A valid cycle:
+ *  - Moves in one direction only (all + or all -)
+ *  - Has length > 1 (no self‑loops)
+ */
 function circularArrayLoop(nums) {
     const n = nums.length;
-
-    function nextIndex(current) {
-        const next = ((current + nums[current]) % n + n) % n;
-        return next;
-    }
+    const next = (i) => ((i + nums[i]) % n + n) % n;
 
     for (let i = 0; i < n; i++) {
-        let slow = i;
-        let fast = i;
-        const direction = nums[i] > 0;
+        if (nums[i] === 0) continue;
 
-        // Helper to check if direction is consistent
-        const isSameDirection = (index) => (nums[index] > 0) === direction;
+        const dir = nums[i] > 0;
+        // if it immediately loops to itself, mark and skip
+        if (next(i) === i) {
+            nums[i] = 0;
+            continue;
+        }
 
+        let slow = i, fast = i;
         while (true) {
-            const nextSlow = nextIndex(slow);
-            const nextFast = nextIndex(fast);
-            const nextFast2 = nextIndex(nextFast);
+            // advance slow one step
+            slow = next(slow);
+            if (
+                nums[slow] === 0 ||
+                (nums[slow] > 0) !== dir ||
+                next(slow) === slow
+            ) break;
 
-            if (!isSameDirection(nextSlow) || !isSameDirection(nextFast) || !isSameDirection(nextFast2)) {
-                break;
-            }
+            // advance fast one step
+            fast = next(fast);
+            if (
+                nums[fast] === 0 ||
+                (nums[fast] > 0) !== dir ||
+                next(fast) === fast
+            ) break;
 
-            slow = nextSlow;
-            fast = nextFast2;
+            // advance fast second step
+            fast = next(fast);
+            if (
+                nums[fast] === 0 ||
+                (nums[fast] > 0) !== dir ||
+                next(fast) === fast
+            ) break;
 
-            if (slow === fast) {
-                if (slow === nextIndex(slow)) {
-                    // 1-element loop — invalid
-                    break;
-                }
-                return true;
-            }
+            if (slow === fast) return true;
         }
 
-        // Mark all nodes in this path as visited
+        // clean up this path
         let j = i;
-        while (isSameDirection(j)) {
-            const next = nextIndex(j);
-            nums[j] = 0; // visited marker
-            j = next;
+        while (nums[j] !== 0 && (nums[j] > 0) === dir) {
+            const nxt = next(j);
+            nums[j] = 0;
+            j = nxt;
         }
     }
 
     return false;
 }
 
-function nextStep(index, move, size) {
-    let result = (index + move) % size;
-    return result < 0 ? result + size : result;
-}
-
-function isNotCycle(nums, originalDir, index) {
-    const currentDir = nums[index] >= 0;
-    if (originalDir !== currentDir || Math.abs(nums[index] % nums.length) === 0) {
-        return true;
-    }
-    return false;
-}
-
-module.exports = { circularArrayLoop };
+module.exports = circularArrayLoop;
