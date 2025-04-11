@@ -1,16 +1,23 @@
-// hashmap/algo.test.js
-const { DesignHashMap } = require('./algo');
+// removeadjduplicates/algo.test.js
 
-test('HashMap basic put/get/remove operations', () => {
-    const map = new DesignHashMap();
-    map.put(5, 100);
-    map.put(2069, 200);
-    map.put(2073, 500);
+const removeDuplicates = require('./algo');
 
-    expect(map.get(5)).toBe(100);
-    expect(map.get(2069)).toBe(200);
-    expect(map.get(2073)).toBe(500);
+test("removeDuplicates('g') should return 'g'", () => {
+    expect(removeDuplicates('g')).toBe('g');
+});
 
-    map.remove(2069);
-    expect(map.get(2069)).toBe(-1);
+test("removeDuplicates('ggaabcdeb') should return 'cdeb'", () => {
+    expect(removeDuplicates('ggaabcdeb')).toBe('cdeb');
+});
+
+test("removeDuplicates('abbddaccaaabcd') should return 'bcd'", () => {
+    expect(removeDuplicates('abbddaccaaabcd')).toBe('bcd');
+});
+
+test("removeDuplicates('aannkwwwkkkwna') should return ''", () => {
+    expect(removeDuplicates('aannkwwwkkkwna')).toBe('');
+});
+
+test("removeDuplicates('abbabccblkklu') should return 'aau'", () => {
+    expect(removeDuplicates('abbabccblkklu')).toBe('aau');
 });
