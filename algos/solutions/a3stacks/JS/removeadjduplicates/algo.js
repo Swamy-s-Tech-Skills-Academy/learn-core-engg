@@ -1,17 +1,25 @@
 // removeadjduplicates/algo.js
 
 function removeDuplicates(s) {
-    const stack = [];
+    let prev = null;
 
-    for (const char of s) {
-        if (stack.length > 0 && stack[stack.length - 1] === char) {
-            stack.pop();
-        } else {
-            stack.push(char);
+    // Keep simplifying until nothing changes
+    while (s !== prev) {
+        prev = s;
+        let stack = [];
+
+        for (let c of s) {
+            if (stack.length > 0 && stack[stack.length - 1] === c) {
+                stack.pop();
+            } else {
+                stack.push(c);
+            }
         }
+
+        s = stack.join("");
     }
 
-    return stack.join('');
+    return s;
 }
 
 module.exports = removeDuplicates;

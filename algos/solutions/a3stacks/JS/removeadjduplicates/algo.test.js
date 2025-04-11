@@ -6,8 +6,8 @@ test("removeDuplicates('g') should return 'g'", () => {
     expect(removeDuplicates('g')).toBe('g');
 });
 
-test("removeDuplicates('ggaabcdeb') should return 'cdeb'", () => {
-    expect(removeDuplicates('ggaabcdeb')).toBe('cdeb');
+test("removeDuplicates('ggaabcdeb') should return 'bcdeb'", () => {
+    expect(removeDuplicates('ggaabcdeb')).toBe('bcdeb');
 });
 
 test("removeDuplicates('abbddaccaaabcd') should return 'bcd'", () => {
@@ -18,6 +18,6 @@ test("removeDuplicates('aannkwwwkkkwna') should return ''", () => {
     expect(removeDuplicates('aannkwwwkkkwna')).toBe('');
 });
 
-test("removeDuplicates('abbabccblkklu') should return 'aau'", () => {
-    expect(removeDuplicates('abbabccblkklu')).toBe('aau');
+test("removeDuplicates('abbabccblkklu') should return 'u'", () => {
+    expect(removeDuplicates('abbabccblkklu')).toBe('u');
 });
