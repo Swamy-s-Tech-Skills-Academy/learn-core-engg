@@ -61,4 +61,4 @@ function circularArrayLoop(nums) {
     return false;
 }
 
-module.exports = circularArrayLoop;
+module.exports = { circularArrayLoop };
