@@ -1,22 +1,26 @@
 // main.js
 
 const { calculator } = require("./calculator/algo");
-const { DesignHashMap } = require("./hashmap/algo");
+const removeDuplicates = require('./removeadjduplicates/algo');
 
 // Helpers
 const { showCalculatorDemo } = require("./calculator/helper_calculator");
-const { showHashMapDemo } = require("./hashmap/helper_hashmap");
+const { showRemoveAdjacentDuplicatesDemo } = require('./removeadjduplicates/helper_removeadjduplicate');
 
 function main() {
     console.log("\n" + "=".repeat(50));
     console.log("✅ Calculator Algorithm Demonstration");
     console.log("=".repeat(50));
     showCalculatorDemo(calculator);
+    console.log("\n" + "-".repeat(50));
 
     console.log("\n" + "=".repeat(50));
-    console.log("✅ HashMap Algorithm Demonstration");
+    console.log("✅ Remove Adjacent Duplicates Algorithm Demonstration");
     console.log("=".repeat(50));
-    showHashMapDemo(DesignHashMap);
+    showRemoveAdjacentDuplicatesDemo(removeDuplicates);
+    console.log("\n" + "-".repeat(50));
 }
 
 main();
+
+
