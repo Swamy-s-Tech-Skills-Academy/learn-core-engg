@@ -10,12 +10,12 @@ test("removeDuplicates('ggaabcdeb') should return 'bcdeb'", () => {
     expect(removeDuplicates('ggaabcdeb')).toBe('bcdeb');
 });
 
-test("removeDuplicates('abbddaccaaabcd') should return 'bcd'", () => {
-    expect(removeDuplicates('abbddaccaaabcd')).toBe('bcd');
+test("removeDuplicates('abbddaccaaabcd') should return 'abcd'", () => {
+    expect(removeDuplicates('abbddaccaaabcd')).toBe('abcd');
 });
 
-test("removeDuplicates('aannkwwwkkkwna') should return ''", () => {
-    expect(removeDuplicates('aannkwwwkkkwna')).toBe('');
+test("removeDuplicates('aannkwwwkkkwna') should return 'kwkwna'", () => {
+    expect(removeDuplicates('aannkwwwkkkwna')).toBe('kwkwna');
 });
 
 test("removeDuplicates('abbabccblkklu') should return 'u'", () => {

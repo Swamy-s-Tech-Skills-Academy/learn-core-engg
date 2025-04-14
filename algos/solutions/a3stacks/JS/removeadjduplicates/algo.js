@@ -1,16 +1,20 @@
 // removeadjduplicates/algo.js
 
-function removeDuplicates(str) {
-    let stack = [];
-    for (let ch of str) {
-        if (stack.length && stack[stack.length - 1] === ch) {
+function removeDuplicates(s) {
+    const stack = [];
+
+    for (const ch of s) {
+        if (stack.length > 0 && stack[stack.length - 1] === ch) {
+            // Found a duplicate, pop it
             stack.pop();
         } else {
+            // No duplicate, push it
             stack.push(ch);
         }
     }
-    let result = stack.join('');
-    return result === str ? result : removeDuplicates(result); // fix is here
+
+    // Join the stack to form the resulting string
+    return stack.join('');
 }
 
 module.exports = removeDuplicates;
