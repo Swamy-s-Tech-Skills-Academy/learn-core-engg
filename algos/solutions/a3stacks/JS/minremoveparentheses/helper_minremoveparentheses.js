@@ -9,6 +9,26 @@ function isParenthesis(char) {
   return char === '(' || char === ')';
 }
 
+const minRemoveParentheses = require('./algo');
+
+function showMinRemoveParenthesesDemo() {
+  const inputs = [
+    "ar)ab(abc)abd(",
+    "a)rt)lm(ikgh)",
+    "aq)xy())qf(a(ba)q)",
+    "(aw))kk())(w(aa)(bv(wt)r)",
+    "(qi)(kl)((y(yt))(r(q(g)s)"
+  ];
+
+  inputs.forEach((input, index) => {
+    const result = minRemoveParentheses(input);
+    console.log(`${index + 1}.	Input: '${input}'`);
+    console.log(`	Valid parentheses: '${result}'`);
+    console.log('-'.repeat(100));
+  });
+}
+
 module.exports = {
   isParenthesis,
+  showMinRemoveParenthesesDemo
 };
