@@ -2,6 +2,7 @@
 
 const { calculator } = require("./calculator/algo");
 const removeDuplicates = require('./removeadjduplicates/algo');
+const minRemoveParentheses = require('./minremoveparentheses/algo');
 
 // Helpers
 const { showCalculatorDemo } = require("./calculator/helper_calculator");
@@ -24,7 +25,7 @@ function main() {
     console.log("\n" + "=".repeat(50));
     console.log("✅ Minimum Remove to Make Valid Parentheses Algorithm Demonstration");
     console.log("=".repeat(50));
-    showMinRemoveParenthesesDemo();
+    showMinRemoveParenthesesDemo(minRemoveParentheses);
     console.log("\n" + "-".repeat(50));
 }
 

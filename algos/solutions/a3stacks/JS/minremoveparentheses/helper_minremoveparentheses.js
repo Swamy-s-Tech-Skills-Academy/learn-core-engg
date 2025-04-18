@@ -9,9 +9,7 @@ function isParenthesis(char) {
   return char === '(' || char === ')';
 }
 
-const minRemoveParentheses = require('./algo');
-
-function showMinRemoveParenthesesDemo() {
+function showMinRemoveParenthesesDemo(algo) {
   const inputs = [
     "ar)ab(abc)abd(",
     "a)rt)lm(ikgh)",
@@ -21,7 +19,7 @@ function showMinRemoveParenthesesDemo() {
   ];
 
   inputs.forEach((input, index) => {
-    const result = minRemoveParentheses(input);
+    const result = algo(input);
     console.log(`${index + 1}.	Input: '${input}'`);
     console.log(`	Valid parentheses: '${result}'`);
     console.log('-'.repeat(100));
