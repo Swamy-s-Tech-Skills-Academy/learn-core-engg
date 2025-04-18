@@ -29,3 +29,7 @@ npm install --save-dev jest
 node main.js
 npm test
 ```
+
+### Minimum Remove to Make Valid Parentheses
+
+This folder contains the implementation of the "Minimum Remove to Make Valid Parentheses" algorithm. The solution ensures that the resulting string represents a valid parenthesization by removing the minimum number of parentheses.
