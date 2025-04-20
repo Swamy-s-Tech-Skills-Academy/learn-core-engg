@@ -1,16 +1,13 @@
-### Dry Run of Failing Test Case (Example 3)
+### Dry Run of Failing Test Case (Example 3 - Updated)
 
 #### Input
-
 ```
 "aq)xy())qf(a(ba)q)"
 ```
 
 #### Steps
-
 1. Initialize `stack = []` and `s_list = ['a', 'q', ')', 'x', 'y', '(', ')', ')', 'q', 'f', '(', 'a', '(', 'b', 'a', ')', 'q', ')']`.
 2. Traverse the string:
-
    - At index 0, character is 'a'. Not a parenthesis, continue.
    - At index 1, character is 'q'. Not a parenthesis, continue.
    - At index 2, character is ')'. Stack is empty, remove it by setting `s_list[2] = ''`.
@@ -34,9 +31,7 @@
 4. Resulting string: `"aqxyqf(a(ba)q)"`.
 
 #### Observations
-
 The algorithm correctly removes unmatched parentheses at indices 2 and 7. However, it fails to handle consecutive unmatched parentheses properly, leading to incorrect results in other cases.
 
 #### Fix
-
 Refine the algorithm to ensure unmatched parentheses are handled comprehensively, including consecutive and nested cases.
