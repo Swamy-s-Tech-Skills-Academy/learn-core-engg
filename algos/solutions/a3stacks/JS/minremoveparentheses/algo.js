@@ -5,20 +5,23 @@ function minRemoveParentheses(s) {
   for (let i = 0; i < s.length; i++) {
     let val = s[i];
 
-    if (stack.length > 0 && stack[stack.length - 1][0] === '(' && val === ')') {
-      stack.pop();
-    } 
-    else if (val === '(' || val === ')') {
-      stack.push([val, i]);
+    if (val === '(') {
+      stack.push(i); // Push index of '('
+    } else if (val === ')') {
+      if (stack.length > 0 && s_list[stack[stack.length - 1]] === '(') {
+        stack.pop(); // Valid pair, pop the matching '('
+      } else {
+        s_list[i] = ''; // Unmatched ')', remove it
+      }
     }
   }
 
-  for (let p of stack) {
-    s_list[p[1]] = "";
+  // Remove any unmatched '(' left in the stack
+  while (stack.length > 0) {
+    s_list[stack.pop()] = '';
   }
 
-  let result = s_list.join('');
-  return result;
+  return s_list.join('');
 }
 
 module.exports = minRemoveParentheses;
