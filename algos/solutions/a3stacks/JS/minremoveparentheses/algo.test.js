@@ -10,14 +10,14 @@ describe('Minimum Remove to Make Valid Parentheses', () => {
   });
 
   test('Example 3', () => {
-    expect(minRemoveParentheses("aq)xy())qf(a(ba)q)")).toBe("aqxyqf(a(ba)q)");
+    expect(minRemoveParentheses("aq)xy())qf(a(ba)q)")).toBe("aqxy()qf(a(ba)q)");
   });
 
   test('Example 4', () => {
-    expect(minRemoveParentheses("(aw))kk())(w(aa)(bv(wt)r)")).toBe("(aw)kk(w(aa)(bv(wt)r)");
+    expect(minRemoveParentheses("(aw))kk())(w(aa)(bv(wt)r)")).toBe("(aw)kk()w(aa)(bv(wt)r)");
   });
 
   test('Example 5', () => {
-    expect(minRemoveParentheses("(qi)(kl)((y(yt))(r(q(g)s)")).toBe("(qi)(kl)((y(yt))(r(q(g)s)");
+    expect(minRemoveParentheses("(qi)(kl)((y(yt))(r(q(g)s)")).toBe("(qi)(kl)(y(yt))r(q(g)s)");
   });
 });
