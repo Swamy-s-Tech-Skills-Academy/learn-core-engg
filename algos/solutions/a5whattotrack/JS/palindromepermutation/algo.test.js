@@ -12,7 +12,7 @@ describe('Palindrome Permutation', () => {
   });
 
   test('Example 3', () => {
-    expect(permutePalindrome("xzz")).toBe(false);
+    expect(permutePalindrome("xzz")).toBe(true);  // Updated to true since "xzz" can be rearranged to "zxz"
   });
 
   test('Example 4', () => {
