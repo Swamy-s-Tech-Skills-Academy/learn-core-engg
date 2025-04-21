@@ -12,11 +12,11 @@ function minRemoveParentheses(s) {
       stack.push([val, i]);
     }
   }
-
+  
   for (let p of stack) {
     s_list[p[1]] = "";
   }
-
+  
   let result = s_list.join('');
   return result;
 }
