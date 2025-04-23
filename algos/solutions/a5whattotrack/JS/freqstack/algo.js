@@ -2,15 +2,15 @@
 
 class FreqStack {
   constructor() {
-    this.frequency = {};    // Tracks frequency of each value
-    this.group = {};        // Groups values by their frequency
-    this.maxFrequency = 0;  // Tracks maximum frequency
-    this.pushOrder = [];    // Tracks the order of pushed elements
+    this.frequency = {};    // Map to store frequency of elements
+    this.group = {};        // Map to store stacks for each frequency
+    this.maxFrequency = 0;  // Current maximum frequency
+    this.pushOrder = [];    // Array to store elements in their push order
   }
 
   push(value) {
     // Increment frequency for this value
-    const freq = (this.frequency[value] || 0) + 1;
+    let freq = (this.frequency[value] || 0) + 1;
     this.frequency[value] = freq;
 
     // Update maxFrequency if needed
@@ -18,51 +18,59 @@ class FreqStack {
       this.maxFrequency = freq;
     }
 
-    // Store value in group by frequency
+    // Create stack for this frequency if it doesn't exist
     if (!this.group[freq]) {
       this.group[freq] = [];
     }
+    
+    // Push value to the stack
     this.group[freq].push(value);
-
-    // Track the push order
+    
+    // Also add to pushOrder to track overall insertion order
     this.pushOrder.push(value);
   }
 
   pop() {
     if (this.maxFrequency === 0) return -1;
 
-    // Get the group with the highest frequency
-    const group = this.group[this.maxFrequency];
+    // Get the stack with highest frequency
+    const stack = this.group[this.maxFrequency];
     
-    // Get the most recently pushed value from this group
-    // To do this, we search from the end of the pushOrder array
-    let value = null;
+    // Find the most recently added value with the current max frequency
+    let mostRecentIndex = -1;
+    let mostRecentValue = null;
+    
+    // We search backward through pushOrder to find most recent value with max frequency
     for (let i = this.pushOrder.length - 1; i >= 0; i--) {
-      const candidate = this.pushOrder[i];
-      if (this.frequency[candidate] === this.maxFrequency) {
-        value = candidate;
-        // Remove this value from pushOrder
-        this.pushOrder.splice(i, 1);
+      const val = this.pushOrder[i];
+      if (this.frequency[val] === this.maxFrequency) {
+        mostRecentIndex = i;
+        mostRecentValue = val;
         break;
       }
     }
     
-    // Remove the value from its frequency group
-    const index = group.lastIndexOf(value);
-    if (index !== -1) {
-      group.splice(index, 1);
+    // Remove this value from pushOrder
+    if (mostRecentIndex !== -1) {
+      this.pushOrder.splice(mostRecentIndex, 1);
     }
     
-    // Update frequency map
-    this.frequency[value]--;
+    // Remove the value from its frequency stack
+    const valueIndex = stack.lastIndexOf(mostRecentValue);
+    if (valueIndex !== -1) {
+      stack.splice(valueIndex, 1);
+    }
     
-    // If the group is now empty, update maxFrequency
-    if (group.length === 0) {
+    // Decrement frequency of this value
+    this.frequency[mostRecentValue]--;
+    
+    // If no more elements with current maxFrequency, decrease it
+    if (stack.length === 0) {
       delete this.group[this.maxFrequency];
       this.maxFrequency--;
     }
     
-    return value;
+    return mostRecentValue;
   }
 }
 
