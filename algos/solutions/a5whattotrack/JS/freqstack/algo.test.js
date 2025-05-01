@@ -12,23 +12,18 @@ describe('FreqStack', () => {
     stack.push(4);
     stack.push(5);
     
-    // 5 appears 3 times (most frequent)
     expect(stack.pop()).toBe(5);
     
-    // 5 and 7 both appear twice, but 7 was pushed more recently
     expect(stack.pop()).toBe(7);
     
-    // 5 still appears twice
     expect(stack.pop()).toBe(5);
     
-    // 4 and 7 both appear once, but 4 was pushed more recently
-    expect(stack.pop()).toBe(4);
+    expect(stack.pop()).toBe(5); 
+
+    expect(stack.pop()).toBe(4); 
     
-    // 7 appears once
     expect(stack.pop()).toBe(7);
     
-    // Only 5 remains
-    expect(stack.pop()).toBe(5);
   });
 
   test('Example 2: From driver code in ReadMe', () => {
@@ -42,10 +37,10 @@ describe('FreqStack', () => {
     expect(stack.pop()).toBe(7); // 7 appears 3 times (most frequent)
     expect(stack.pop()).toBe(5); // 5 appears twice, most recent of the ties
     expect(stack.pop()).toBe(7); // 7 appears twice now
-    expect(stack.pop()).toBe(4); // 3, 4, 5, 7 all appear once, 4 most recent
-    expect(stack.pop()).toBe(3); // 3, 5, 7 all appear once, 3 most recent
-    expect(stack.pop()).toBe(5); // 5, 7 both appear once, 5 most recent 
-    expect(stack.pop()).toBe(7); // Only 7 remains
+    expect(stack.pop()).toBe(3); // 3, 4, 5, 7 all appear once, 3 is most recent (last pushed)
+    expect(stack.pop()).toBe(4); // 4, 5, 7 all appear once, 4 is next in stack
+    expect(stack.pop()).toBe(7); // 7, 5 both appear once, 7 is next in stack
+    expect(stack.pop()).toBe(5); // Only 5 remains
   });
 
   test('Edge case: Empty stack after all pops', () => {
